@@ -3,13 +3,28 @@ session_start();
 ob_start();
 include "config.php";
 if(isset($_SESSION['qrlog'])){
-    $sqluser=$DB_CON->prepare("SELECT * FROM admin WHERE id_admin='$_SESSION[qrid]'");
+
+    if($_SESSION['qrlevel']=="admin"){
+        $table="admin";
+        $fieldnama="nama_admin";
+        $fieldID="id_admin";
+    }else if($_SESSION['qrlevel']=="dosen"){
+        $table="dosen";
+        $fieldnama="nama_dosen";
+        $fieldID="id_dosen";
+    }else if($_SESSION['qrlevel']=="mahasiswa"){
+        $table="mahasiswa";
+        $fieldnama="nama_mahasiswa";
+        $fieldID="nim_mahasiswa";
+    }
+
+    $sqluser=$DB_CON->prepare("SELECT * FROM $table WHERE $fieldID='$_SESSION[qrid]' AND visible='1'");
     $sqluser->execute();
     if($sqluser->rowCount()==0){
         header("location:login.php");
     }else{
         $hasil=$sqluser->fetch(PDO::FETCH_ASSOC);
-        $namauser=$hasil['nama_admin'];
+        $namauser=$hasil[$fieldnama];
     }
 }else{
     $linkback=$linkglobal.'login.php';

@@ -47,6 +47,14 @@ include"config.php";
                                     <label for="signin-password" class="control-label sr-only">Password</label>
                                     <input type="password" name="password" class="form-control" id="signin-password" placeholder="Password">
                                 </div>
+                                <div class="form-group">
+                                    <label for="signin-password" class="control-label sr-only">Level</label>
+                                    <select class="form-control" name="level">
+                                        <option value="admin">Administrator</option>
+                                        <option value="dosen">Dosen</option>
+                                        <option value="mahasiswa">Mahasiswa</option>
+                                    </select>
+                                </div>
                                 <button type="submit" name="login" class="btn btn-primary btn-lg btn-block">LOGIN</button>
                             </form>
                         </div>
@@ -71,15 +79,31 @@ include"config.php";
 if(isset($_POST['login'])){
     $username=$_POST['username'];
     $password=md5($_POST['password']);
-    $sql=$DB_CON->prepare("SELECT * FROM admin WHERE username='$username' AND password='$password' AND visible='1'");
+    $level=$_POST['level'];
+
+    if($level=="admin"){
+        $table="admin";
+        $level="admin";
+        $qrid="id_admin";
+    }else if($level=="dosen"){
+        $table="dosen";
+        $level="dosen";
+        $qrid="id_dosen";
+    }else if($level=="mahasiswa"){
+        $table="mahasiswa";
+        $level="mahasiswa";
+        $qrid="nim_mahasiswa";
+    }
+
+    $sql=$DB_CON->prepare("SELECT * FROM $table WHERE username='$username' AND password='$password' AND visible='1'");
     $sql->execute();
     if($sql->rowCount()==0){
         echo"<script>alert('Username atau Password salah!!');</script>";
     }else{
         $hasil=$sql->fetch(PDO::FETCH_ASSOC);
         $_SESSION['qrlog']=true;
-        $_SESSION['qrlevel']="admin";
-        $_SESSION['qrid']=$hasil['id_admin'];
+        $_SESSION['qrlevel']=$level;
+        $_SESSION['qrid']=$hasil[$qrid];
         header("location:home.php");
     }
 }
