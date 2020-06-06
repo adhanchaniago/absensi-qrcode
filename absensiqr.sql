@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 06, 2020 at 01:20 AM
+-- Generation Time: Jun 06, 2020 at 02:51 PM
 -- Server version: 10.4.12-MariaDB-log
 -- PHP Version: 7.2.19
 
@@ -96,10 +96,32 @@ INSERT INTO `dosen` (`id_dosen`, `id_admin`, `nama_dosen`, `username`, `password
 
 CREATE TABLE `kelas_mhs` (
   `id_kelas_mhs` int(11) NOT NULL,
-  `nim_mahasiwa` varchar(30) NOT NULL,
+  `nim_mahasiswa` varchar(30) NOT NULL,
   `id_mengajar` int(11) NOT NULL,
   `visible` enum('1','0') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kelas_mhs`
+--
+
+INSERT INTO `kelas_mhs` (`id_kelas_mhs`, `nim_mahasiswa`, `id_mengajar`, `visible`) VALUES
+(1, '15114101008', 1, '1'),
+(2, '15114101006', 1, '1'),
+(3, '15114101010', 1, '1'),
+(4, '15114101013', 1, '1'),
+(5, '15114101014', 2, '1'),
+(6, '15114101016', 2, '1'),
+(7, '15114101001', 2, '1'),
+(8, '15114101004', 2, '1'),
+(9, '15114101012', 3, '1'),
+(10, '15114101003', 3, '1'),
+(11, '15114101005', 3, '1'),
+(12, '15114101007', 3, '1'),
+(13, '15114101015', 4, '1'),
+(14, '15114101009', 4, '1'),
+(15, '15114101011', 4, '1'),
+(16, '15114101002', 4, '1');
 
 -- --------------------------------------------------------
 
@@ -180,6 +202,17 @@ CREATE TABLE `mengajar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `mengajar`
+--
+
+INSERT INTO `mengajar` (`id_mengajar`, `id_dosen`, `kode_matakuliah`, `buka_kelas`, `visible`) VALUES
+(1, 1, 'TI201991002', '0', '1'),
+(2, 3, 'TI201991001', '0', '1'),
+(3, 4, 'TI201991003', '0', '1'),
+(4, 2, 'TI201991004', '0', '1'),
+(5, 3, 'TI201991003', '0', '0');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -208,7 +241,7 @@ ALTER TABLE `dosen`
 --
 ALTER TABLE `kelas_mhs`
   ADD PRIMARY KEY (`id_kelas_mhs`),
-  ADD KEY `nim_mahasiwa` (`nim_mahasiwa`),
+  ADD KEY `nim_mahasiwa` (`nim_mahasiswa`),
   ADD KEY `id_mengajar` (`id_mengajar`);
 
 --
@@ -259,13 +292,13 @@ ALTER TABLE `dosen`
 -- AUTO_INCREMENT for table `kelas_mhs`
 --
 ALTER TABLE `kelas_mhs`
-  MODIFY `id_kelas_mhs` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kelas_mhs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `mengajar`
 --
 ALTER TABLE `mengajar`
-  MODIFY `id_mengajar` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -288,7 +321,7 @@ ALTER TABLE `dosen`
 --
 ALTER TABLE `kelas_mhs`
   ADD CONSTRAINT `fk_idajar_kelas` FOREIGN KEY (`id_mengajar`) REFERENCES `mengajar` (`id_mengajar`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_nim_kelas` FOREIGN KEY (`nim_mahasiwa`) REFERENCES `mahasiswa` (`nim_mahasiswa`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_nim_kelas` FOREIGN KEY (`nim_mahasiswa`) REFERENCES `mahasiswa` (`nim_mahasiswa`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `mahasiswa`
