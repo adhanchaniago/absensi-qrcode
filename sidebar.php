@@ -3,12 +3,12 @@
     <div class="sidebar-scroll">
         <nav>
             <ul class="nav">
-                <li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Beranda</span></a></li>
+                <li><a href="<?php echo $linkglobal; ?>home.php" class="active"><i class="lnr lnr-home"></i> <span>Beranda</span></a></li>
                 <li>
                     <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-user"></i> <span>Data Dosen</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                     <div id="subPages" class="collapse ">
                         <ul class="nav">
-                            <li><a href="http://localhost/qr/page/dosen/" class="">Dosen</a></li>
+                            <li><a href="<?php echo $linkglobal; ?>page/dosen/" class="">Dosen</a></li>
                             <li><a href="page-lockscreen.html" class="">Mengajar</a></li>
                         </ul>
                     </div>
@@ -17,7 +17,7 @@
                     <a href="#subMhs" data-toggle="collapse" class="collapsed"><i class="lnr lnr-users"></i> <span>Data Mahasiswa</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                     <div id="subMhs" class="collapse ">
                         <ul class="nav">
-                            <li><a href="http://localhost/qr/page/mahasiswa/" class="">Mahasiswa</a></li>
+                            <li><a href="<?php echo $linkglobal; ?>page/mahasiswa/" class="">Mahasiswa</a></li>
                             <li><a href="page-lockscreen.html" class="">Kelas</a></li>
                         </ul>
                     </div>
@@ -27,7 +27,7 @@
                     <div id="subPagesUser" class="collapse ">
                         <ul class="nav">
                             <li><a href="page-profile.html" class="">Admin</a></li>
-                            <li><a href="http://localhost/qr/page/matakuliah/" class="">Master Matakuliah</a></li>
+                            <li><a href="<?php echo $linkglobal; ?>page/matakuliah/" class="">Master Matakuliah</a></li>
                         </ul>
                     </div>
                 </li>

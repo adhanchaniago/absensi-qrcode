@@ -1,7 +1,7 @@
 <?php
 include "../../header.php";
 include "../../sidebar.php";
-$link = "http://localhost/qr/page/mahasiswa/";
+$link= $linkglobal.'page/mahasiswa/';
 if (!empty($_GET['id'])) {
     $sqledit = $DB_CON->prepare("SELECT * FROM mahasiswa WHERE nim_mahasiswa='$_GET[id]'");
     $sqledit->execute();

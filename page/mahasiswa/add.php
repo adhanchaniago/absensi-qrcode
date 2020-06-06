@@ -1,7 +1,7 @@
 <?php
 include "../../header.php";
 include "../../sidebar.php";
-$link = "http://localhost/qr/page/mahasiswa/";
+$link= $linkglobal.'page/mahasiswa/';
 ?>
 <!-- MAIN -->
 <div class="main">

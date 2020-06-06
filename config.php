@@ -14,4 +14,5 @@ try{
 }
 //END Koneksi PDO DAN MYSQL
 $urlselect=1;
+$linkglobal="http://localhost/absensi-qrcode/";
 ?>
