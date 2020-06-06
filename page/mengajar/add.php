@@ -11,7 +11,7 @@ $link = $linkglobal . 'page/mengajar/';
             <!-- OVERVIEW -->
             <div class="panel panel-headline">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Kelas</h3>
+                    <h3 class="panel-title">Mengajar</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -19,7 +19,7 @@ $link = $linkglobal . 'page/mengajar/';
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label text-right">Nama Dosen</label>
                                 <div class="col-sm-7">
-                                    <select class="form-control" name="dosen" required id="dosen" onchange="GetMataKuliahByDosen()">
+                                    <select class="form-control" name="dosen" required>
                                         <option value="">Pilih Dosen</option>
                                         <?php
                                         $sqldosen = $DB_CON->prepare("SELECT * FROM dosen WHERE visible='1' ORDER BY nama_dosen ASC");
@@ -36,25 +36,16 @@ $link = $linkglobal . 'page/mengajar/';
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label text-right">Mata Kuliah</label>
                                 <div class="col-sm-7">
-                                    <select class="form-control" name="matakuliah" required id="matakuliah">
+                                    <select class="form-control" name="matakuliah" required>
                                         <option value="">Pilih Matakuliah</option>
-                                        
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label text-right">Mahasiswa</label>
-                                <div class="col-sm-7">
-                                    <select class="form-control" name="mahasiswa" required>
-                                        <option value="">Pilih Mahasiswa</option>
                                         <?php
-                                            $sqlmahasiswa=$DB_CON->prepare("SELECT * FROM mahasiswa WHERE visible='1' ORDER BY nama_mahasiswa");
-                                            $sqlmahasiswa->execute();
-                                            while($hasilmahasiswa=$sqlmahasiswa->fetch(PDO::FETCH_ASSOC)){
+                                        $sqlmatakuliah = $DB_CON->prepare("SELECT * FROM matakuliah WHERE visible='1' ORDER BY nama_matakuliah ASC");
+                                        $sqlmatakuliah->execute();
+                                        while ($hasilmatakuliah = $sqlmatakuliah->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
-                                        <option value="<?php echo $hasilmahasiswa['nim_mahasiswa'] ?>"><?php echo $hasilmahasiswa['nama_mahasiswa']; ?></option>
+                                            <option value="<?php echo $hasilmatakuliah['kode_matakuliah']; ?>"><?php echo $hasilmatakuliah['nama_matakuliah']; ?></option>
                                         <?php
-                                            }
+                                        }
                                         ?>
                                     </select>
                                 </div>
@@ -79,10 +70,10 @@ $link = $linkglobal . 'page/mengajar/';
 <?php include "../../footer.php"; ?>
 <?php
 if (isset($_POST['ok'])) {
+    $dosen = $_POST['dosen'];
     $matakuliah = $_POST['matakuliah'];
-    $mahasiswa = $_POST['mahasiswa'];
 
-    $sql = $DB_CON->prepare("INSERT INTO kelas_mhs SET nim_mahasiswa='$mahasiswa',id_mengajar='$matakuliah',visible='1'");
+    $sql = $DB_CON->prepare("INSERT INTO mengajar SET id_dosen='$dosen',kode_matakuliah='$matakuliah',visible='1',buka_kelas='0'");
     $sql->execute();
     if ($sql) {
         header("location:index.php");

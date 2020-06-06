@@ -9,7 +9,7 @@
                     <div id="subPages" class="collapse ">
                         <ul class="nav">
                             <li><a href="<?php echo $linkglobal; ?>page/dosen/" class="">Dosen</a></li>
-                            <li><a href="page-lockscreen.html" class="">Mengajar</a></li>
+                            <li><a href="<?php echo $linkglobal; ?>page/mengajar/" class="">Mengajar</a></li>
                         </ul>
                     </div>
                 </li>
@@ -18,7 +18,7 @@
                     <div id="subMhs" class="collapse ">
                         <ul class="nav">
                             <li><a href="<?php echo $linkglobal; ?>page/mahasiswa/" class="">Mahasiswa</a></li>
-                            <li><a href="page-lockscreen.html" class="">Kelas</a></li>
+                            <li><a href="<?php echo $linkglobal; ?>page/kelas/" class="">Kelas</a></li>
                         </ul>
                     </div>
                 </li>

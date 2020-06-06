@@ -1,7 +1,7 @@
 <?php
 include "../../header.php";
 include "../../sidebar.php";
-$link= $linkglobal.'page/kelas/';
+$link= $linkglobal.'page/mengajar/';
 ?>
 <!-- MAIN -->
 <div class="main">
@@ -11,7 +11,7 @@ $link= $linkglobal.'page/kelas/';
             <!-- OVERVIEW -->
             <div class="panel panel-headline">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Kelas</h3>
+                    <h3 class="panel-title">Mengajar</h3>
                     <div class="right">
                         <a href="<?php echo $link; ?>add.php" class="btn btn-success">Tambah Data</a>
                     </div>
@@ -22,16 +22,16 @@ $link= $linkglobal.'page/kelas/';
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Mahasiswa</th>
-                                    <th>Dosen</th>
+                                    <th>Nama Dosen</th>
                                     <th>Mata Kuliah</th>
+                                    <th>SKS</th>
                                     <th>Jadwal</th>
                                     <th>Tindakan</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                    $sql=$DB_CON->prepare("SELECT mahasiswa.*,dosen.*,matakuliah.*,kelas_mhs.* FROM kelas_mhs LEFT OUTER JOIN mengajar ON(kelas_mhs.id_mengajar=mengajar.id_mengajar) LEFT OUTER JOIN mahasiswa ON(mahasiswa.nim_mahasiswa=kelas_mhs.nim_mahasiswa) LEFT OUTER JOIN dosen ON(dosen.id_dosen=mengajar.id_dosen) LEFT OUTER JOIN matakuliah ON(matakuliah.kode_matakuliah=mengajar.kode_matakuliah) WHERE kelas_mhs.visible='1'");
+                                    $sql=$DB_CON->prepare("SELECT dosen.*,matakuliah.*,mengajar.* FROM mengajar LEFT OUTER JOIN dosen ON(mengajar.id_dosen=dosen.id_dosen) LEFT OUTER JOIN matakuliah ON(mengajar.kode_matakuliah=matakuliah.kode_matakuliah) WHERE mengajar.visible='1'");
                                     $sql->execute();
                                     if($sql->rowCount() > 0){
                                         $no=1;
@@ -39,12 +39,12 @@ $link= $linkglobal.'page/kelas/';
                                 ?>
                                 <tr>
                                     <td><?php echo $no; ?></td>
-                                    <td><?php echo $hasil['nama_mahasiswa']; ?></td>
                                     <td><?php echo $hasil['nama_dosen']; ?></td>
                                     <td><?php echo $hasil['nama_matakuliah']; ?></td>
+                                    <td><?php echo $hasil['sks']; ?></td>
                                     <td><?php echo str_replace("-"," ",$hasil['jadwal']); ?></td>
                                     <td>
-                                        <a onclick="return Tanya()" href="<?php echo $link; ?>index.php?hapus=<?php echo $hasil['id_kelas_mhs']; ?>" class="btn btn-danger btn-sm"><i class="lnr lnr-trash"></i></a>
+                                        <a onclick="return Tanya()" href="<?php echo $link; ?>index.php?hapus=<?php echo $hasil['id_mengajar']; ?>" class="btn btn-danger btn-sm"><i class="lnr lnr-trash"></i></a>
                                     </td>
                                 </tr>
                                 <?php
@@ -72,7 +72,7 @@ $link= $linkglobal.'page/kelas/';
 <?php include "../../footer.php"; ?>
 <?php
 if(isset($_GET['hapus'])){
-    $sqlhapus=$DB_CON->prepare("UPDATE kelas_mhs SET visible='0' WHERE id_kelas_mhs='$_GET[hapus]'");
+    $sqlhapus=$DB_CON->prepare("UPDATE mengajar SET visible='0' WHERE id_mengajar='$_GET[hapus]'");
     $sqlhapus->execute();
     if($sqlhapus){
         header("location:index.php");

@@ -14,13 +14,27 @@
         <script src="<?php echo $linkglobal; ?>assets/vendor/chartist/js/chartist.min.js"></script>
         <script src="<?php echo $linkglobal; ?>assets/scripts/klorofil-common.js"></script>
         <script>
-            function Tanya(){
+            Tanya = () => {
                 if(confirm("Yakin akan Mengahpus Data Ini??")){
                     return true;
                 }else{
                     return false;
                 }
             }
+
+            GetMataKuliahByDosen = () =>{
+                let dosen = $("#dosen").val();
+                $.post(
+                    "<?php echo $linkglobal; ?>ajax/getmatakuliahbydosen.php",
+                    {
+                        dosen:dosen
+                    },
+                    (data) => {
+                        $("#matakuliah").html(data);
+                    }
+                );
+            }
+
         </script>
         </body>
 

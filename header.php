@@ -12,7 +12,8 @@ if(isset($_SESSION['qrlog'])){
         $namauser=$hasil['nama_admin'];
     }
 }else{
-    header("location:login.php");
+    $linkback=$linkglobal.'login.php';
+    header("location:$linkback");
 }
 ?>
 <!doctype html>
@@ -54,7 +55,7 @@ if(isset($_SESSION['qrlog'])){
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<?php echo $linkglobal; ?>assets/img/user.png" class="img-circle" alt="Avatar"> <span><?php echo $namauser; ?></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#"><i class="lnr lnr-cog"></i> <span>Ganti Password</span></a></li>
-                                <li><a href="logout.php"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+                                <li><a href="<?php echo $linkglobal; ?>logout.php"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                             </ul>
                         </li>
                     </ul>
