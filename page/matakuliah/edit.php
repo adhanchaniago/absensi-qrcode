@@ -9,9 +9,6 @@ if (!empty($_GET['id'])) {
         $hasiledit = $sqledit->fetch(PDO::FETCH_ASSOC);
         $nama = $hasiledit['nama_matakuliah'];
         $sks = $hasiledit['sks'];
-        $jadwal = explode("-", $hasiledit['jadwal']);
-        $hari = $jadwal[0];
-        $jam = $jadwal[1];
         $kode = $hasiledit['kode_matakuliah'];
     } else {
         header("location:index.php");
@@ -52,18 +49,6 @@ if (!empty($_GET['id'])) {
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label text-right">Hari</label>
-                                <div class="col-sm-7">
-                                    <input type="text" name="hari" class="form-control" placeholder="Hari" value="<?php echo $hari; ?>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label text-right">Jam</label>
-                                <div class="col-sm-7">
-                                    <input type="text" name="jam" class="form-control" placeholder="Jam" value="<?php echo $jam; ?>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label text-right"></label>
                                 <div class="col-sm-7">
                                     <button type="submit" name="ok" class="btn btn-success">Simpan</button>
@@ -85,12 +70,11 @@ if (!empty($_GET['id'])) {
 if (isset($_POST['ok'])) {
     $nama = $_POST['nama'];
     $sks = $_POST['sks'];
-    $jadwal = $_POST['hari'] . '-' . $_POST['jam'];
     $kode = $_POST['kode'];
     $output = 0;
 
     if ($kode == $hasiledit['kode_matakuliah']) {
-        $sql = $DB_CON->prepare("UPDATE matakuliah SET nama_matakuliah='$nama',sks='$sks',jadwal='$jadwal',kode_matakuliah='$kode' WHERE kode_matakuliah='$_GET[id]'");
+        $sql = $DB_CON->prepare("UPDATE matakuliah SET nama_matakuliah='$nama',sks='$sks',kode_matakuliah='$kode' WHERE kode_matakuliah='$_GET[id]'");
         $sql->execute();
         if ($sql) {
             $output = 1;

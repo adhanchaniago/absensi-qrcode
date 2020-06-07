@@ -35,18 +35,6 @@ $link= $linkglobal.'page/matakuliah/';
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label text-right">Hari</label>
-                                <div class="col-sm-7">
-                                    <input type="text" name="hari" class="form-control" placeholder="Hari">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label text-right">Jam</label>
-                                <div class="col-sm-7">
-                                    <input type="text" name="jam" class="form-control" placeholder="Jam">
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label text-right"></label>
                                 <div class="col-sm-7">
                                     <button type="submit" name="ok" class="btn btn-success">Simpan</button>
@@ -68,13 +56,12 @@ $link= $linkglobal.'page/matakuliah/';
 if (isset($_POST['ok'])) {
     $nama = $_POST['nama'];
     $sks = $_POST['sks'];
-    $jadwal = $_POST['hari'] . '-' . $_POST['jam'];
     $kode = $_POST['kode'];
 
     $sqlcek = $DB_CON->prepare("SELECT * FROM matakuliah WHERE kode_matakuliah='$kode'");
     $sqlcek->execute();
     if ($sqlcek->rowCount() == 0) {
-        $sql = $DB_CON->prepare("INSERT INTO matakuliah SET nama_matakuliah='$nama',sks='$sks',jadwal='$jadwal',kode_matakuliah='$kode',visible='1',id_admin='$_SESSION[qrid]'");
+        $sql = $DB_CON->prepare("INSERT INTO matakuliah SET nama_matakuliah='$nama',sks='$sks',kode_matakuliah='$kode',visible='1',id_admin='$_SESSION[qrid]'");
         $sql->execute();
         if ($sql) {
             header("location:index.php");

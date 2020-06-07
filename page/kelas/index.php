@@ -31,7 +31,7 @@ $link= $linkglobal.'page/kelas/';
                             </thead>
                             <tbody>
                                 <?php
-                                    $sql=$DB_CON->prepare("SELECT mahasiswa.*,dosen.*,matakuliah.*,kelas_mhs.* FROM kelas_mhs LEFT OUTER JOIN mengajar ON(kelas_mhs.id_mengajar=mengajar.id_mengajar) LEFT OUTER JOIN mahasiswa ON(mahasiswa.nim_mahasiswa=kelas_mhs.nim_mahasiswa) LEFT OUTER JOIN dosen ON(dosen.id_dosen=mengajar.id_dosen) LEFT OUTER JOIN matakuliah ON(matakuliah.kode_matakuliah=mengajar.kode_matakuliah) WHERE kelas_mhs.visible='1'");
+                                    $sql=$DB_CON->prepare("SELECT mahasiswa.*,dosen.*,matakuliah.*,kelas_mhs.*,mengajar.* FROM kelas_mhs LEFT OUTER JOIN mengajar ON(kelas_mhs.id_mengajar=mengajar.id_mengajar) LEFT OUTER JOIN mahasiswa ON(mahasiswa.nim_mahasiswa=kelas_mhs.nim_mahasiswa) LEFT OUTER JOIN dosen ON(dosen.id_dosen=mengajar.id_dosen) LEFT OUTER JOIN matakuliah ON(matakuliah.kode_matakuliah=mengajar.kode_matakuliah) WHERE kelas_mhs.visible='1'");
                                     $sql->execute();
                                     if($sql->rowCount() > 0){
                                         $no=1;

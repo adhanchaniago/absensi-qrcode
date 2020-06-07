@@ -25,7 +25,6 @@ $link= $linkglobal.'page/matakuliah/';
                                     <th>Kode Matakuliah</th>
                                     <th>Matakuliah</th>
                                     <th>SKS</th>
-                                    <th>Jadwal</th>
                                     <th>Tindakan</th>
                                 </tr>
                             </thead>
@@ -42,7 +41,6 @@ $link= $linkglobal.'page/matakuliah/';
                                     <td><?php echo $hasil['kode_matakuliah']; ?></td>
                                     <td><?php echo $hasil['nama_matakuliah']; ?></td>
                                     <td><?php echo $hasil['sks']; ?></td>
-                                    <td><?php echo str_replace("-"," ",$hasil['jadwal']); ?></td>
                                     <td>
                                         <a href="<?php echo $link; ?>edit.php?id=<?php echo $hasil['kode_matakuliah']; ?>" class="btn btn-warning btn-sm"><i class="lnr lnr-pencil"></i></a>
                                         <a onclick="return Tanya()" href="<?php echo $link; ?>index.php?hapus=<?php echo $hasil['kode_matakuliah']; ?>" class="btn btn-danger btn-sm"><i class="lnr lnr-trash"></i></a>

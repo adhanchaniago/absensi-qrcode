@@ -38,7 +38,7 @@
                 <?php
                     }else if($_SESSION['qrlevel']=="dosen"){
                 ?>
-                <li><a href="tables.html" class=""><i class="lnr lnr-lock"></i> <span>Buka Kelas</span></a></li>
+                <li><a href="<?php echo $linkglobal; ?>page/bukakelas" class=""><i class="lnr lnr-lock"></i> <span>Buka Kelas</span></a></li>
                 <?php
                     }else if($_SESSION['qrlevel']=="mahasiswa"){
                 ?>
