@@ -42,7 +42,7 @@
                 <?php
                     }else if($_SESSION['qrlevel']=="mahasiswa"){
                 ?>
-                <li><a href="typography.html" class=""><i class="lnr lnr-checkmark-circle"></i> <span>Kelas Aktif</span></a></li>
+                <li><a href="<?php echo $linkglobal; ?>page/kelas-aktif" class=""><i class="lnr lnr-checkmark-circle"></i> <span>Kelas Aktif</span></a></li>
                 <?php
                     }
                 ?>
