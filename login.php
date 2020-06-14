@@ -50,9 +50,19 @@ include"config.php";
                                 <div class="form-group">
                                     <label for="signin-password" class="control-label sr-only">Level</label>
                                     <select class="form-control" name="level">
+                                        <?php
+                                            if(empty($_GET['validasi'])){
+                                        ?>
                                         <option value="admin">Administrator</option>
                                         <option value="dosen">Dosen</option>
                                         <option value="mahasiswa">Mahasiswa</option>
+                                        <?php
+                                            }else{
+                                        ?>
+                                        <option value="dosen">Dosen</option>
+                                        <?php
+                                            }
+                                        ?>
                                     </select>
                                 </div>
                                 <button type="submit" name="login" class="btn btn-primary btn-lg btn-block">LOGIN</button>
@@ -104,7 +114,12 @@ if(isset($_POST['login'])){
         $_SESSION['qrlog']=true;
         $_SESSION['qrlevel']=$level;
         $_SESSION['qrid']=$hasil[$qrid];
-        header("location:home.php");
+        if(empty($_GET['validasi'])){
+            $link=$linkglobal.'home.php';
+        }else{
+            $link=$linkglobal.'page/validasi/index.php?id='.$_GET['validasi'];
+        }
+        header("location:$link");
     }
 }
 ?>

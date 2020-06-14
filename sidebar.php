@@ -39,6 +39,7 @@
                     }else if($_SESSION['qrlevel']=="dosen"){
                 ?>
                 <li><a href="<?php echo $linkglobal; ?>page/bukakelas" class=""><i class="lnr lnr-lock"></i> <span>Buka Kelas</span></a></li>
+                <li><a href="<?php echo $linkglobal; ?>page/materi" class=""><i class="lnr lnr-lock"></i> <span>Materi Pengajaran</span></a></li>
                 <?php
                     }else if($_SESSION['qrlevel']=="mahasiswa"){
                 ?>
