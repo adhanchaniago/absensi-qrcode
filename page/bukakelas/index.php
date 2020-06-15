@@ -23,7 +23,7 @@ $link = $linkglobal . 'page/bukakelas/';
                     <!-- PANEL NO PADDING -->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Jadwal Mengajar</h3>
+                            <h3 class="panel-title">Jadwal Mengajar <?php echo $hari; ?></h3>
                         </div>
                         <div class="panel-body text-center">
                             <div class="col-lg-8">
@@ -40,7 +40,7 @@ $link = $linkglobal . 'page/bukakelas/';
                 <div class="row">
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Jadwal Mengajar</h3>
+                            <h3 class="panel-title">Jadwal Mengajar <?php echo $hari; ?></h3>
                         </div>
                         <div class="panel-body">
                             <div class="row">

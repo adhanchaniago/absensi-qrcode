@@ -31,7 +31,7 @@ $link= $linkglobal.'page/materi/';
                             </thead>
                             <tbody>
                                 <?php
-                                    $sql=$DB_CON->prepare("SELECT * FROM dosen WHERE visible='1'");
+                                    $sql=$DB_CON->prepare("SELECT matakuliah.kode_matakuliah,matakuliah.nama_matakuliah,materi.id_materi,materi.tgl_materi,materi.judul_materi FROM materi LEFT OUTER JOIN mengajar ON(mengajar.id_mengajar=materi.id_mengajar) LEFT OUTER JOIN matakuliah ON(matakuliah.kode_matakuliah=mengajar.kode_matakuliah) LEFT OUTER JOIN dosen ON(dosen.id_dosen=mengajar.id_dosen) WHERE mengajar.id_dosen='$_SESSION[qrid]' AND materi.visible='1'");
                                     $sql->execute();
                                     if($sql->rowCount() > 0){
                                         $no=1;
@@ -39,12 +39,12 @@ $link= $linkglobal.'page/materi/';
                                 ?>
                                 <tr>
                                     <td><?php echo $no; ?></td>
-                                    <td><?php echo $hasil['nama_dosen']; ?></td>
-                                    <td><?php echo $hasil['no_telp']; ?></td>
-                                    <td><?php echo str_replace("-"," ",$hasil['alamat']); ?></td>
-                                    <td><?php echo $hasil['gelar']; ?></td>
+                                    <td><?php echo $hasil['kode_matakuliah']; ?></td>
+                                    <td><?php echo $hasil['nama_matakuliah']; ?></td>
+                                    <td><?php echo $hasil['tgl_materi']; ?></td>
+                                    <td><?php echo $hasil['judul_materi']; ?></td>
                                     <td>
-                                        <a onclick="return Tanya()" href="<?php echo $link; ?>index.php?hapus=<?php echo $hasil['id_dosen']; ?>" class="btn btn-danger btn-sm"><i class="lnr lnr-trash"></i></a>
+                                        <a onclick="return Tanya()" href="<?php echo $link; ?>index.php?hapus=<?php echo $hasil['id_materi']; ?>" class="btn btn-danger btn-sm"><i class="lnr lnr-trash"></i></a>
                                     </td>
                                 </tr>
                                 <?php
@@ -72,7 +72,7 @@ $link= $linkglobal.'page/materi/';
 <?php include "../../footer.php"; ?>
 <?php
 if(isset($_GET['hapus'])){
-    $sqlhapus=$DB_CON->prepare("UPDATE dosen SET visible='0' WHERE id_dosen='$_GET[hapus]'");
+    $sqlhapus=$DB_CON->prepare("UPDATE materi SET visible='0' WHERE id_materi='$_GET[hapus]'");
     $sqlhapus->execute();
     if($sqlhapus){
         header("location:index.php");

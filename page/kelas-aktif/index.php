@@ -79,7 +79,7 @@ $link = $linkglobal . 'page/kelas-aktif/';
                                             <div class="panel-footer">
                                                 <div class="row">
                                                     <?php
-                                                        $sqlabsencek=$DB_CON->prepare("SELECT * FROM absensi WHERE id_kelas='$hasilmengajar[id_kelas_mhs]' AND visible='1'");
+                                                        $sqlabsencek=$DB_CON->prepare("SELECT * FROM absensi WHERE id_kelas='$hasilmengajar[id_kelas_mhs]' AND tgl_absensi='$tglasekarang' AND visible='1'");
                                                         $sqlabsencek->execute();
                                                         $sqlabsencount=$sqlabsencek->rowcount();
                                                         $sqlabsenrow=$sqlabsencek->fetch(PDO::FETCH_ASSOC);
