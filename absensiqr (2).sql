@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 06, 2020 at 02:51 PM
+-- Generation Time: Jun 15, 2020 at 02:50 PM
 -- Server version: 10.4.12-MariaDB-log
 -- PHP Version: 7.2.19
 
@@ -33,8 +33,18 @@ CREATE TABLE `absensi` (
   `id_kelas` int(11) NOT NULL,
   `tgl_absensi` date NOT NULL,
   `jam_absensi` time NOT NULL,
+  `validasi` enum('0','1') NOT NULL,
+  `val_materi` enum('0','1') NOT NULL,
+  `qrcode` varchar(100) NOT NULL,
   `visible` enum('1','0') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `absensi`
+--
+
+INSERT INTO `absensi` (`id_absensi`, `id_kelas`, `tgl_absensi`, `jam_absensi`, `validasi`, `val_materi`, `qrcode`, `visible`) VALUES
+(1, 3, '2020-06-15', '09:51:40', '1', '0', '320200615095140.png', '1');
 
 -- --------------------------------------------------------
 
@@ -121,7 +131,8 @@ INSERT INTO `kelas_mhs` (`id_kelas_mhs`, `nim_mahasiswa`, `id_mengajar`, `visibl
 (13, '15114101015', 4, '1'),
 (14, '15114101009', 4, '1'),
 (15, '15114101011', 4, '1'),
-(16, '15114101002', 4, '1');
+(16, '15114101002', 4, '1'),
+(17, '15114101005', 6, '1');
 
 -- --------------------------------------------------------
 
@@ -173,7 +184,6 @@ CREATE TABLE `matakuliah` (
   `id_admin` int(11) NOT NULL,
   `nama_matakuliah` varchar(100) NOT NULL,
   `sks` int(11) NOT NULL,
-  `jadwal` varchar(100) NOT NULL,
   `visible` enum('1','0') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -181,11 +191,33 @@ CREATE TABLE `matakuliah` (
 -- Dumping data for table `matakuliah`
 --
 
-INSERT INTO `matakuliah` (`kode_matakuliah`, `id_admin`, `nama_matakuliah`, `sks`, `jadwal`, `visible`) VALUES
-('TI201991001', 1, 'Statistika', 3, 'Selasa-13:00', '1'),
-('TI201991002', 1, 'Algoritma Pemrograman', 4, 'Senin-17:00', '1'),
-('TI201991003', 1, 'Pemrograman Web Dasar', 4, 'Rabu-11:30', '1'),
-('TI201991004', 1, 'Pemrograman Mobile', 4, 'Kamis-14:00', '1');
+INSERT INTO `matakuliah` (`kode_matakuliah`, `id_admin`, `nama_matakuliah`, `sks`, `visible`) VALUES
+('TI201991001', 1, 'Statistika', 3, '1'),
+('TI201991002', 1, 'Algoritma Pemrograman', 4, '1'),
+('TI201991003', 1, 'Pemrograman Web Dasar', 4, '1'),
+('TI201991004', 1, 'Pemrograman Mobile', 4, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `materi`
+--
+
+CREATE TABLE `materi` (
+  `id_materi` int(11) NOT NULL,
+  `id_mengajar` int(11) NOT NULL,
+  `tgl_materi` date NOT NULL,
+  `judul_materi` varchar(100) NOT NULL,
+  `des_materi` text NOT NULL,
+  `visible` enum('1','0') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data for table `materi`
+--
+
+INSERT INTO `materi` (`id_materi`, `id_mengajar`, `tgl_materi`, `judul_materi`, `des_materi`, `visible`) VALUES
+(1, 1, '2020-06-15', 'Penegenal Pascal', 'Cara Instalasi\r\nmembuat aplikasi pascal pertama', '1');
 
 -- --------------------------------------------------------
 
@@ -197,6 +229,7 @@ CREATE TABLE `mengajar` (
   `id_mengajar` int(11) NOT NULL,
   `id_dosen` int(11) NOT NULL,
   `kode_matakuliah` varchar(30) NOT NULL,
+  `jadwal` varchar(50) NOT NULL,
   `buka_kelas` enum('0','1') NOT NULL,
   `visible` enum('1','0') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -205,12 +238,13 @@ CREATE TABLE `mengajar` (
 -- Dumping data for table `mengajar`
 --
 
-INSERT INTO `mengajar` (`id_mengajar`, `id_dosen`, `kode_matakuliah`, `buka_kelas`, `visible`) VALUES
-(1, 1, 'TI201991002', '0', '1'),
-(2, 3, 'TI201991001', '0', '1'),
-(3, 4, 'TI201991003', '0', '1'),
-(4, 2, 'TI201991004', '0', '1'),
-(5, 3, 'TI201991003', '0', '0');
+INSERT INTO `mengajar` (`id_mengajar`, `id_dosen`, `kode_matakuliah`, `jadwal`, `buka_kelas`, `visible`) VALUES
+(1, 1, 'TI201991002', 'Senin-09:00', '0', '1'),
+(2, 3, 'TI201991001', 'Selasa-13:00', '0', '1'),
+(3, 4, 'TI201991003', 'Rabu-11:30', '0', '1'),
+(4, 2, 'TI201991004', 'Kamis-14:00', '0', '1'),
+(5, 3, 'TI201991003', 'Minggu-14:00', '0', '1'),
+(6, 1, 'TI201991003', 'Minggu-12:00', '0', '1');
 
 --
 -- Indexes for dumped tables
@@ -259,6 +293,12 @@ ALTER TABLE `matakuliah`
   ADD KEY `id_admin` (`id_admin`);
 
 --
+-- Indexes for table `materi`
+--
+ALTER TABLE `materi`
+  ADD PRIMARY KEY (`id_materi`);
+
+--
 -- Indexes for table `mengajar`
 --
 ALTER TABLE `mengajar`
@@ -274,7 +314,7 @@ ALTER TABLE `mengajar`
 -- AUTO_INCREMENT for table `absensi`
 --
 ALTER TABLE `absensi`
-  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -292,13 +332,19 @@ ALTER TABLE `dosen`
 -- AUTO_INCREMENT for table `kelas_mhs`
 --
 ALTER TABLE `kelas_mhs`
-  MODIFY `id_kelas_mhs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_kelas_mhs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `materi`
+--
+ALTER TABLE `materi`
+  MODIFY `id_materi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `mengajar`
 --
 ALTER TABLE `mengajar`
-  MODIFY `id_mengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_mengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
