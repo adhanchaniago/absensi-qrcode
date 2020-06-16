@@ -34,7 +34,7 @@
                         </ul>
                     </div>
                 </li>
-                <li><a href="icons.html" class=""><i class="lnr lnr-file-empty"></i> <span>Laporan</span></a></li>
+                <li><a href="<?php echo $linkglobal; ?>page/laporan" class=""><i class="lnr lnr-file-empty"></i> <span>Laporan</span></a></li>
                 <?php
                     }else if($_SESSION['qrlevel']=="dosen"){
                 ?>
@@ -44,6 +44,8 @@
                     }else if($_SESSION['qrlevel']=="mahasiswa"){
                 ?>
                 <li><a href="<?php echo $linkglobal; ?>page/kelas-aktif" class=""><i class="lnr lnr-checkmark-circle"></i> <span>Kelas Aktif</span></a></li>
+
+                <li><a href="<?php echo $linkglobal; ?>page/validasi/materi.php" class=""><i class="lnr lnr-checkmark-circle"></i> <span>Persetujuan Materi</span></a></li>
                 <?php
                     }
                 ?>

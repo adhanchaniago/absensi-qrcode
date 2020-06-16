@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 15, 2020 at 02:50 PM
+-- Generation Time: Jun 16, 2020 at 07:50 AM
 -- Server version: 10.4.12-MariaDB-log
 -- PHP Version: 7.2.19
 
@@ -44,7 +44,8 @@ CREATE TABLE `absensi` (
 --
 
 INSERT INTO `absensi` (`id_absensi`, `id_kelas`, `tgl_absensi`, `jam_absensi`, `validasi`, `val_materi`, `qrcode`, `visible`) VALUES
-(1, 3, '2020-06-15', '09:51:40', '1', '0', '320200615095140.png', '1');
+(1, 3, '2020-06-15', '09:51:40', '1', '0', '320200615095140.png', '1'),
+(2, 5, '2020-06-16', '09:55:51', '1', '1', '520200616095551.png', '1');
 
 -- --------------------------------------------------------
 
@@ -217,7 +218,8 @@ CREATE TABLE `materi` (
 --
 
 INSERT INTO `materi` (`id_materi`, `id_mengajar`, `tgl_materi`, `judul_materi`, `des_materi`, `visible`) VALUES
-(1, 1, '2020-06-15', 'Penegenal Pascal', 'Cara Instalasi\r\nmembuat aplikasi pascal pertama', '1');
+(1, 1, '2020-06-15', 'Penegenal Pascal', 'Cara Instalasi\r\nmembuat aplikasi pascal pertama', '1'),
+(2, 2, '2020-06-16', 'Probalilitas', 'Dasar Dasar Probabilitas', '1');
 
 -- --------------------------------------------------------
 
@@ -296,7 +298,8 @@ ALTER TABLE `matakuliah`
 -- Indexes for table `materi`
 --
 ALTER TABLE `materi`
-  ADD PRIMARY KEY (`id_materi`);
+  ADD PRIMARY KEY (`id_materi`),
+  ADD KEY `id_mengajar` (`id_mengajar`);
 
 --
 -- Indexes for table `mengajar`
@@ -314,7 +317,7 @@ ALTER TABLE `mengajar`
 -- AUTO_INCREMENT for table `absensi`
 --
 ALTER TABLE `absensi`
-  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -338,7 +341,7 @@ ALTER TABLE `kelas_mhs`
 -- AUTO_INCREMENT for table `materi`
 --
 ALTER TABLE `materi`
-  MODIFY `id_materi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_materi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `mengajar`
@@ -380,6 +383,12 @@ ALTER TABLE `mahasiswa`
 --
 ALTER TABLE `matakuliah`
   ADD CONSTRAINT `fk_id_admin_matkul` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `materi`
+--
+ALTER TABLE `materi`
+  ADD CONSTRAINT `fk_mengajar_materi` FOREIGN KEY (`id_mengajar`) REFERENCES `mengajar` (`id_mengajar`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `mengajar`

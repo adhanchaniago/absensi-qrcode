@@ -19,4 +19,14 @@ function HariIndo($hari){
     }
     return $namahari;
 }
+
+function GetValidasi($val)
+{
+    if($val=="1"){
+        $validasi="YA";
+    }else{
+        $validasi="TIDAK";
+    }
+    return $validasi;
+}
 ?>
