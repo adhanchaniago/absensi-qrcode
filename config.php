@@ -17,7 +17,7 @@ $urlselect = 1;
 if($_SERVER['REMOTE_ADDR']=="::1"){
 	$linkcontent="http://localhost/absensi-qrcode/";
 }else{
-	$linkcontent="http://192.168.0.77/absensi-qrcode/";
+	$linkcontent="http://192.168.43.195/absensi-qrcode/";
 }
 $linkglobal = $linkcontent;
 date_default_timezone_set("asia/singapore");

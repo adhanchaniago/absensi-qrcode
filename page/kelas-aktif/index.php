@@ -130,7 +130,7 @@ if (isset($_GET['absen'])) {
 
     $tempdir = "../../qrcode/"; //Nama folder tempat menyimpan file qrcode
     //isi qrcode jika di scan
-    $codeContents = "http://192.168.0.77/absensi-qrcode/page/validasi/index.php?id=".$_GET['absen'] . '' . str_replace("-","",$tgl) . '' . str_replace(":","",$jam).".png";
+    $codeContents = "http://192.168.43.195/absensi-qrcode/page/validasi/index.php?id=".$_GET['absen'] . '' . str_replace("-","",$tgl) . '' . str_replace(":","",$jam).".png";
     //nama file qrcode yang akan disimpan
     $namaFile = $_GET['absen'] . '' . str_replace("-","",$tgl) . '' . str_replace(":","",$jam).".png";
     //ECC Level
