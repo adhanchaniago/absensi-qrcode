@@ -15,7 +15,7 @@ $link = $linkglobal . 'page/bukakelas/';
             ?>
             <?php
             $hari = HariIndo(date('l'));
-            $sqlmengajar = $DB_CON->prepare("SELECT matakuliah.kode_matakuliah,matakuliah.nama_matakuliah,mengajar.jadwal,mengajar.id_mengajar FROM `mengajar` LEFT OUTER JOIN dosen ON(mengajar.id_dosen=dosen.id_dosen) LEFT OUTER JOIN matakuliah ON(matakuliah.kode_matakuliah=mengajar.kode_matakuliah) WHERE mengajar.id_dosen='$_SESSION[qrid]' AND mengajar.jadwal LIKE'%$hari%' AND mengajar.buka_kelas='0'");
+            $sqlmengajar = $DB_CON->prepare("SELECT matakuliah.kode_matakuliah,matakuliah.nama_matakuliah,mengajar.jadwal,mengajar.id_mengajar,mengajar.buka_kelas FROM `mengajar` LEFT OUTER JOIN dosen ON(mengajar.id_dosen=dosen.id_dosen) LEFT OUTER JOIN matakuliah ON(matakuliah.kode_matakuliah=mengajar.kode_matakuliah) WHERE mengajar.id_dosen='$_SESSION[qrid]' AND mengajar.jadwal LIKE'%$hari%'");
             $sqlmengajar->execute();
             if ($sqlmengajar->rowCount() == 0) {
             ?>
@@ -81,7 +81,17 @@ $link = $linkglobal . 'page/bukakelas/';
                                             <!--end panel body-->
                                             <div class="panel-footer">
                                                 <div class="row">
+                                                    <?php
+                                                        if($hasilmengajar['buka_kelas']==0){
+                                                    ?>
                                                     <a href="<?php echo $link; ?>index.php?buka=<?php echo $hasilmengajar['id_mengajar']; ?>" class="btn btn-primary">Buka Kelas</a>
+                                                    <?php
+                                                        }else{
+                                                    ?>
+                                                    <a href="<?php echo $link; ?>index.php?tutup=<?php echo $hasilmengajar['id_mengajar']; ?>" class="btn btn-danger">Tutup Kelas</a>
+                                                    <?php        
+                                                        }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -110,6 +120,15 @@ if(isset($_GET['buka'])){
     $sqlbuka->execute();
     if($sqlbuka){
         flash("msg","Kelas Berhasil dibuka");
+        header("location:index.php");
+    }
+}
+
+if(isset($_GET['tutup'])){
+    $sqltutup=$DB_CON->prepare("UPDATE mengajar SET buka_kelas='0' WHERE id_mengajar='$_GET[tutup]'");
+    $sqltutup->execute();
+    if($sqltutup){
+        flash("msg","Kelas Berhasil ditutup");
         header("location:index.php");
     }
 }

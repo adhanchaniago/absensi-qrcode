@@ -29,7 +29,7 @@
                     <a href="#subPagesUser" data-toggle="collapse" class="collapsed"><i class="lnr lnr-inbox"></i> <span>Master Data</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                     <div id="subPagesUser" class="collapse ">
                         <ul class="nav">
-                            <li><a href="page-profile.html" class="">Admin</a></li>
+                            <li><a href="<?php echo $linkglobal; ?>page/admin/" class="">Admin</a></li>
                             <li><a href="<?php echo $linkglobal; ?>page/matakuliah/" class="">Master Matakuliah</a></li>
                         </ul>
                     </div>
