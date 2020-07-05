@@ -35,6 +35,16 @@
                 );
             }
 
+            GoToMhs = () =>{
+                let vCount = $("#count").val();
+                if(vCount==="" || vCount==0){
+                    alert("Jumlah Tidask Boleh Kosong atau 0");
+                }else{
+                    document.location="<?php echo $linkglobal; ?>page/mahasiswa/add.php?jml="+vCount
+                }
+               
+            }
+
         </script>
         </body>
 
