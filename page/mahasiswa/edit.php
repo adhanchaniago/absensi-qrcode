@@ -1,7 +1,7 @@
 <?php
 include "../../header.php";
 include "../../sidebar.php";
-$link= $linkglobal.'page/mahasiswa/';
+$link = $linkglobal . 'page/mahasiswa/';
 if (!empty($_GET['id'])) {
     $sqledit = $DB_CON->prepare("SELECT * FROM mahasiswa WHERE nim_mahasiswa='$_GET[id]'");
     $sqledit->execute();
@@ -16,6 +16,7 @@ if (!empty($_GET['id'])) {
         $kodepos = $alamat[2];
         $nim = $hasiledit['nim_mahasiswa'];
         $pass = $hasiledit['password'];
+        $angkatan= $hasiledit['angkatan'];
     } else {
         header("location:index.php");
     }
@@ -85,6 +86,12 @@ if (!empty($_GET['id'])) {
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-2 col-form-label text-right">Angkatan</label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="angkatan" class="form-control" placeholder="Angkatan" value="<?php echo $angkatan; ?>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label text-right"></label>
                                 <div class="col-sm-7">
                                     <button type="submit" name="ok" class="btn btn-success">Simpan</button>
@@ -115,10 +122,11 @@ if (isset($_POST['ok'])) {
     $telp = $_POST['telp'];
     $alamat = $_POST['namajalan'] . '-' . $_POST['kecamatan'] . '-' . $_POST['kodepos'];
     $nim = $_POST['nim'];
+    $angkatan = $_POST['angkatan'];
     $output = 0;
 
     if ($nim == $hasiledit['nim_mahasiswa']) {
-        $sql = $DB_CON->prepare("UPDATE mahasiswa SET nama_mahasiswa='$nama',username='$username',password='$password',no_telp='$telp',alamat='$alamat',nim_mahasiswa='$nim' WHERE nim_mahasiswa='$_GET[id]'");
+        $sql = $DB_CON->prepare("UPDATE mahasiswa SET nama_mahasiswa='$nama',username='$username',password='$password',no_telp='$telp',alamat='$alamat',nim_mahasiswa='$nim',angkatan='$angkatan' WHERE nim_mahasiswa='$_GET[id]'");
         $sql->execute();
         if ($sql) {
             $output = 1;
@@ -129,7 +137,7 @@ if (isset($_POST['ok'])) {
         $sqlcek = $DB_CON->prepare("SELECT * FROM mahasiswa WHERE nim_mahasiswa='$nim'");
         $sqlcek->execute();
         if ($sqlcek->rowCount() == 0) {
-            $sql = $DB_CON->prepare("UPDATE mahasiswa SET nama_mahasiswa='$nama',username='$username',password='$password',no_telp='$telp',alamat='$alamat',nim_mahasiswa='$nim' WHERE nim_mahasiswa='$_GET[id]'");
+            $sql = $DB_CON->prepare("UPDATE mahasiswa SET nama_mahasiswa='$nama',username='$username',password='$password',no_telp='$telp',alamat='$alamat',nim_mahasiswa='$nim',angkatan='$angkatan' WHERE nim_mahasiswa='$_GET[id]'");
             $sql->execute();
             if ($sql) {
                 $output = 1;

@@ -67,6 +67,12 @@ $link = $linkglobal . 'page/mahasiswa/';
                                         <input type="text" name="kodepos<?php echo $i; ?>" class="form-control" placeholder="Kode Pos">
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label text-right">Angkatan</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" name="angkatan<?php echo $i; ?>" class="form-control" placeholder="Angkatan">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -107,11 +113,12 @@ if (isset($_POST['ok'])) {
         $telp = $_POST['telp' . $i];
         $alamat = $_POST['namajalan' . $i] . '-' . $_POST['kecamatan' . $i] . '-' . $_POST['kodepos' . $i];
         $nim = $_POST['nim' . $i];
+        $angkatan = $_POST['angkatan'.$i];
 
         $sqlcek = $DB_CON->prepare("SELECT * FROM mahasiswa WHERE nim_mahasiswa='$nim'");
         $sqlcek->execute();
         if ($sqlcek->rowCount() == 0) {
-            $sql = $DB_CON->prepare("INSERT INTO mahasiswa SET nama_mahasiswa='$nama',username='$username',password='$password',no_telp='$telp',alamat='$alamat',nim_mahasiswa='$nim',visible='1',id_admin='$_SESSION[qrid]'");
+            $sql = $DB_CON->prepare("INSERT INTO mahasiswa SET nama_mahasiswa='$nama',username='$username',password='$password',no_telp='$telp',alamat='$alamat',nim_mahasiswa='$nim',visible='1',id_admin='$_SESSION[qrid]',angkatan='$angkatan'");
             $sql->execute();
             if ($sql) {
                 $sukses++;

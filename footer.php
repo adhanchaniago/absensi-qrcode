@@ -15,19 +15,18 @@
         <script src="<?php echo $linkglobal; ?>assets/scripts/klorofil-common.js"></script>
         <script>
             Tanya = () => {
-                if(confirm("Yakin akan Mengahpus Data Ini??")){
+                if (confirm("Yakin akan Mengahpus Data Ini??")) {
                     return true;
-                }else{
+                } else {
                     return false;
                 }
             }
 
-            GetMataKuliahByDosen = () =>{
+            GetMataKuliahByDosen = () => {
                 let dosen = $("#dosen").val();
                 $.post(
-                    "<?php echo $linkglobal; ?>ajax/getmatakuliahbydosen.php",
-                    {
-                        dosen:dosen
+                    "<?php echo $linkglobal; ?>ajax/getmatakuliahbydosen.php", {
+                        dosen: dosen
                     },
                     (data) => {
                         $("#matakuliah").html(data);
@@ -35,16 +34,37 @@
                 );
             }
 
-            GoToMhs = () =>{
+            GoToMhs = () => {
                 let vCount = $("#count").val();
-                if(vCount==="" || vCount==0){
+                if (vCount === "" || vCount == 0) {
                     alert("Jumlah Tidask Boleh Kosong atau 0");
-                }else{
-                    document.location="<?php echo $linkglobal; ?>page/mahasiswa/add.php?jml="+vCount
+                } else {
+                    document.location = "<?php echo $linkglobal; ?>page/mahasiswa/add.php?jml=" + vCount
                 }
-               
+
             }
 
+            GoToSerachMhs = () =>{
+                let q = $("#angkatan").val();
+                document.location = "<?php echo $linkglobal; ?>page/kelas/add.php?cari=1&q="+q;
+            }
+
+            checkAll = (ele) => {
+                let checkboxes = document.getElementsByTagName('input');
+                if (ele.checked) {
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        if (checkboxes[i].type == 'checkbox') {
+                            checkboxes[i].checked = true;
+                        }
+                    }
+                } else {
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        if (checkboxes[i].type == 'checkbox') {
+                            checkboxes[i].checked = false;
+                        }
+                    }
+                }
+            }
         </script>
         </body>
 
