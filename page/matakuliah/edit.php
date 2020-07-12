@@ -85,7 +85,7 @@ if (isset($_POST['ok'])) {
         $sqlcek = $DB_CON->prepare("SELECT * FROM matakuliah WHERE kode_matakuliah='$kode'");
         $sqlcek->execute();
         if ($sqlcek->rowCount() == 0) {
-            $sql = $DB_CON->prepare("UPDATE matakuliah SET nama_matakuliah='$nama',sks='$sks',jadwal='$jadwal',kode_matakuliah='$kode' WHERE kode_matakuliah='$_GET[id]'");
+            $sql = $DB_CON->prepare("UPDATE matakuliah SET nama_matakuliah='$nama',sks='$sks',kode_matakuliah='$kode' WHERE kode_matakuliah='$_GET[id]'");
             $sql->execute();
             if ($sql) {
                 $output = 1;
