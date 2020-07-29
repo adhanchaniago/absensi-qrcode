@@ -34,7 +34,15 @@
                         </ul>
                     </div>
                 </li>
-                <li><a href="<?php echo $linkglobal; ?>page/laporan" class=""><i class="lnr lnr-file-empty"></i> <span>Laporan</span></a></li>
+                <li>
+                    <a href="#subPagesLap" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Laporan</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                    <div id="subPagesLap" class="collapse ">
+                        <ul class="nav">
+                            <li><a href="<?php echo $linkglobal; ?>page/laporan/" class="">Laporan Absensi</a></li>
+                            <li><a href="<?php echo $linkglobal; ?>page/laporan/kehadiran.php" class="">Laporan Kehadiran</a></li>
+                        </ul>
+                    </div>
+                </li>
                 <?php
                     }else if($_SESSION['qrlevel']=="dosen"){
                 ?>
