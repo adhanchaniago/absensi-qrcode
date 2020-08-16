@@ -8,26 +8,26 @@ if (isset($_GET['act'])) {
     $tgl2 = $_GET['tgl2'];
     if ($_GET['matakuliah'] !== "") {
         $filtermatakuliah = "AND mengajar.kode_matakuliah='$_GET[matakuliah]'";
-        $dbmatakuliah=$_GET['matakuliah'];
+        $dbmatakuliah = $_GET['matakuliah'];
     } else {
         $filtermatakuliah = "";
-        $dbmatakuliah="";
+        $dbmatakuliah = "";
     }
 
     if ($_GET['dosen'] !== "") {
         $filterdosen = "AND mengajar.id_dosen='$_GET[dosen]'";
-        $dbdosen=$_GET['dosen'];
+        $dbdosen = $_GET['dosen'];
     } else {
         $filterdosen = "";
-        $dbdosen="";
+        $dbdosen = "";
     }
 } else {
     $tgl1 = date('Y-m-d');;
     $tgl2 = date('Y-m-d');;
     $filterdosen = "";
     $filtermatakuliah = "";
-    $dbdosen="";
-    $dbmatakuliah="";
+    $dbdosen = "";
+    $dbmatakuliah = "";
 }
 ?>
 <html>
@@ -83,6 +83,21 @@ if (isset($_GET['act'])) {
 </head>
 
 <body>
+    <div style="text-align: center; width:100%; margin: 0 0 10px 0; padding: 0px; border-bottom:3px solid #000;">
+        <div style="width:100%; margin: auto; padding:0px;">
+            <div style="float: left; margin: 0 10px 10px 0;">
+                <img src="<?php echo $linkglobal; ?>/assets/img/LOGO-UNDHIRA-fix.png">
+            </div>
+
+            <div style="float: left; margin: 0px; padding:0px">
+                <h1 style="margin: 0px; padding:5px 0">UNIVERSITAS DHYANA PURA</h1>
+                <h4 style="margin: 0px; padding:5px 0">UNDHIRA - BALI</h4>
+                <p style="margin: 0px; padding:5px 0">SK MENDIKNAS RI. NOMOR 142/E/O/2011</p>
+                <h4 style="margin: 0px; padding:5px 0">Perguruan tinggi teladan dan unggulan</h4>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
     <div id="container">
         <div class="panel panel-headline">
             <div class="panel-heading text-center">

@@ -66,6 +66,10 @@ if (isset($_GET['act'])) {
             margin: 0px;
             padding: 3px 0;
         }
+        @media print
+        {
+            div#head{display:block}
+        }
     </style>
     <script>
         window.print()
@@ -73,6 +77,21 @@ if (isset($_GET['act'])) {
 </head>
 
 <body>
+    <div id="head" style="text-align: center; width:100%; margin: 0 0 10px 0; padding: 0px; border-bottom:3px solid #000;">
+        <div style="width:100%; margin: auto; padding:0px;">
+            <div style="float: left; margin: 0 10px 10px 0;">
+                <img src="<?php echo $linkglobal; ?>/assets/img/LOGO-UNDHIRA-fix.png">
+            </div>
+
+            <div style="float: left; margin: 0px; padding:0px">
+                <h1 style="margin: 0px; padding:5px 0">UNIVERSITAS DHYANA PURA</h1>
+                <h4 style="margin: 0px; padding:5px 0">UNDHIRA - BALI</h4>
+                <p style="margin: 0px; padding:5px 0">SK MENDIKNAS RI. NOMOR 142/E/O/2011</p>
+                <h4 style="margin: 0px; padding:5px 0">Perguruan tinggi teladan dan unggulan</h4>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
     <div id="container">
 
         <div class="panel panel-headline">

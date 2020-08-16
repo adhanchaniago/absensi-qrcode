@@ -57,6 +57,7 @@
                 <?php
                     }
                 ?>
+                <li><a href="<?php echo $linkglobal; ?>page/bantuan/"><i class="lnr lnr-question-circle"></i> <span>Bantuan</span></a></li>
             </ul>
         </nav>
     </div>
