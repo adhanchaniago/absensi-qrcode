@@ -163,7 +163,13 @@ if (isset($_POST['ok'])) {
     $tgl2 = $_POST['tgl2'];
     $matakuliah = $_POST['matakuliah'];
 
-    $link = $_SERVER['PHP_SELF'] . '?act=1&tgl1=' . $tgl1 . '&tgl2=' . $tgl2 . '&matakuliah=' . $matakuliah;
-    header("location:$link");
+    $ket = "Periode: " . $tgl1 . " - " . $tgl2 . " matakuliah: " . $matakuliah;
+
+    $sqlinsert = $DB_CON->prepare("INSERT INTO lap_kehadiran SET id_admin='$_SESSION[qrid]',tgl='" . date('Y-m-d') . "',ket='$ket',visible='1'");
+    $sqlinsert->execute();
+    if ($sqlinsert) {
+        $link = $_SERVER['PHP_SELF'] . '?act=1&tgl1=' . $tgl1 . '&tgl2=' . $tgl2 . '&matakuliah=' . $matakuliah;
+        header("location:$link");
+    }
 }
 ?>

@@ -8,26 +8,26 @@ if (isset($_GET['act'])) {
     $tgl2 = $_GET['tgl2'];
     if ($_GET['matakuliah'] !== "") {
         $filtermatakuliah = "AND mengajar.kode_matakuliah='$_GET[matakuliah]'";
-        $dbmatakuliah=$_GET['matakuliah'];
+        $dbmatakuliah = $_GET['matakuliah'];
     } else {
         $filtermatakuliah = "";
-        $dbmatakuliah="";
+        $dbmatakuliah = "";
     }
 
     if ($_GET['dosen'] !== "") {
         $filterdosen = "AND mengajar.id_dosen='$_GET[dosen]'";
-        $dbdosen=$_GET['dosen'];
+        $dbdosen = $_GET['dosen'];
     } else {
         $filterdosen = "";
-        $dbdosen="";
+        $dbdosen = "";
     }
 } else {
     $tgl1 = date('Y-m-d');;
     $tgl2 = date('Y-m-d');;
     $filterdosen = "";
     $filtermatakuliah = "";
-    $dbdosen="";
-    $dbmatakuliah="";
+    $dbdosen = "";
+    $dbmatakuliah = "";
 }
 ?>
 <!-- MAIN -->
@@ -65,10 +65,10 @@ if (isset($_GET['act'])) {
                                         $sqlmatakuliah = $DB_CON->prepare("SELECT * FROM matakuliah WHERE visible='1'");
                                         $sqlmatakuliah->execute();
                                         while ($hasilmatakuliah = $sqlmatakuliah->fetch(PDO::FETCH_ASSOC)) {
-                                            if($hasilmatakuliah['kode_matakuliah']==$dbmatakuliah){
-                                                $selectmatakuliah="selected";
-                                            }else{
-                                                $selectmatakuliah="";
+                                            if ($hasilmatakuliah['kode_matakuliah'] == $dbmatakuliah) {
+                                                $selectmatakuliah = "selected";
+                                            } else {
+                                                $selectmatakuliah = "";
                                             }
                                         ?>
                                             <option value="<?php echo $hasilmatakuliah['kode_matakuliah'] ?>" <?php echo $selectmatakuliah ?>><?php echo $hasilmatakuliah['nama_matakuliah']; ?></option>
@@ -87,10 +87,10 @@ if (isset($_GET['act'])) {
                                         $sqldosen = $DB_CON->prepare("SELECT * FROM dosen WHERE visible='1'");
                                         $sqldosen->execute();
                                         while ($hasildosen = $sqldosen->fetch(PDO::FETCH_ASSOC)) {
-                                            if($hasildosen['id_dosen']==$dbdosen){
-                                                $selectdosen="selected";
-                                            }else{
-                                                $selectdosen="";
+                                            if ($hasildosen['id_dosen'] == $dbdosen) {
+                                                $selectdosen = "selected";
+                                            } else {
+                                                $selectdosen = "";
                                             }
                                         ?>
                                             <option value="<?php echo $hasildosen['id_dosen'] ?>" <?php echo $selectdosen; ?>><?php echo $hasildosen['nama_dosen']; ?></option>
@@ -201,7 +201,13 @@ if (isset($_POST['ok'])) {
     $matakuliah = $_POST['matakuliah'];
     $dosen = $_POST['dosen'];
 
-    $link = $_SERVER['PHP_SELF'] . '?act=1&tgl1=' . $tgl1 . '&tgl2=' . $tgl2 . '&matakuliah=' . $matakuliah . '&dosen=' . $dosen;
-    header("location:$link");
+    $ket = "Periode: " . $tgl1 . " - " . $tgl2 . " matakuliah: " . $matakuliah . " dosen: " . $dosen;
+
+    $sqlinsert = $DB_CON->prepare("INSERT INTO lap_absensi SET id_admin='$_SESSION[qrid]',tgl='" . date('Y-m-d') . "',ket='$ket',visible='1'");
+    $sqlinsert->execute();
+    if ($sqlinsert) {
+        $link = $_SERVER['PHP_SELF'] . '?act=1&tgl1=' . $tgl1 . '&tgl2=' . $tgl2 . '&matakuliah=' . $matakuliah . '&dosen=' . $dosen;
+        header("location:$link");
+    }
 }
 ?>
