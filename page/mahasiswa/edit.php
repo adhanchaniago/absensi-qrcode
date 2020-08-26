@@ -16,7 +16,7 @@ if (!empty($_GET['id'])) {
         $kodepos = $alamat[2];
         $nim = $hasiledit['nim_mahasiswa'];
         $pass = $hasiledit['password'];
-        $angkatan= $hasiledit['angkatan'];
+        $angkatan = $hasiledit['angkatan'];
     } else {
         header("location:index.php");
     }
@@ -41,6 +41,12 @@ if (!empty($_GET['id'])) {
                                 <label class="col-sm-2 col-form-label text-right">Nim Mahasiswa</label>
                                 <div class="col-sm-7">
                                     <input type="text" name="nim" class="form-control" placeholder="Nim Mahasiswa" value="<?php echo $nim; ?>" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label text-right">Id admin</label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="idadmin" class="form-control" placeholder="ID Admin" value="<?php echo $hasiledit['id_admin']; ?>" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -83,6 +89,12 @@ if (!empty($_GET['id'])) {
                                 <label class="col-sm-2 col-form-label text-right">Kode Pos</label>
                                 <div class="col-sm-7">
                                     <input type="text" name="kodepos" class="form-control" placeholder="Kode Pos" value="<?php echo $kodepos; ?>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label text-right">Visible</label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="visible" class="form-control" placeholder="visible" value="1" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">

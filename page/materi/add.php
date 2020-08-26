@@ -57,6 +57,12 @@ $link = $linkglobal . 'page/materi/';
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-2 col-form-label text-right">Visible</label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="visible" class="form-control" placeholder="visible" value="1" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label text-right"></label>
                                 <div class="col-sm-7">
                                     <button type="submit" name="ok" class="btn btn-success">Simpan</button>

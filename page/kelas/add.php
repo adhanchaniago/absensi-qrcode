@@ -42,23 +42,12 @@ $link = $linkglobal . 'page/kelas/';
                                     </select>
                                 </div>
                             </div>
-                            <!--<div class="form-group row">
-                                <label class="col-sm-2 col-form-label text-right">Mahasiswa</label>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label text-right">Visible</label>
                                 <div class="col-sm-7">
-                                    <select class="form-control" name="mahasiswa" required>
-                                        <option value="">Pilih Mahasiswa</option>
-                                        <?php
-                                        $sqlmahasiswa = $DB_CON->prepare("SELECT * FROM mahasiswa WHERE visible='1' ORDER BY nama_mahasiswa");
-                                        $sqlmahasiswa->execute();
-                                        while ($hasilmahasiswa = $sqlmahasiswa->fetch(PDO::FETCH_ASSOC)) {
-                                        ?>
-                                        <option value="<?php echo $hasilmahasiswa['nim_mahasiswa'] ?>"><?php echo $hasilmahasiswa['nama_mahasiswa']; ?></option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
+                                    <input type="text" name="visible" class="form-control" placeholder="visible" value="1" readonly>
                                 </div>
-                            </div>-->
+                            </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label text-right"></label>
                                 <div class="col-sm-7">
@@ -81,16 +70,16 @@ $link = $linkglobal . 'page/kelas/';
                             $sqlangkatan = $DB_CON->prepare("SELECT DISTINCT angkatan FROM mahasiswa WHERE visible='1' ORDER BY angkatan ASC");
                             $sqlangkatan->execute();
                             while ($hasilangkatan = $sqlangkatan->fetch(PDO::FETCH_ASSOC)) {
-                                if(empty($_GET['cari']) or $_GET['q']==""){
-                                    $selectAngkatan="";
-                                }else{
-                                    $selectAngkatan=$_GET['q'];
+                                if (empty($_GET['cari']) or $_GET['q'] == "") {
+                                    $selectAngkatan = "";
+                                } else {
+                                    $selectAngkatan = $_GET['q'];
                                 }
 
-                                if($selectAngkatan==$hasilangkatan['angkatan']){
-                                    $sAngkatan="selected";
-                                }else{
-                                    $sAngkatan="";
+                                if ($selectAngkatan == $hasilangkatan['angkatan']) {
+                                    $sAngkatan = "selected";
+                                } else {
+                                    $sAngkatan = "";
                                 }
                             ?>
                                 <option value="<?php echo $hasilangkatan['angkatan']; ?>" <?php echo $sAngkatan; ?>><?php echo $hasilangkatan['angkatan']; ?></option>
@@ -113,10 +102,10 @@ $link = $linkglobal . 'page/kelas/';
                             </thead>
                             <tbody>
                                 <?php
-                                if(empty($_GET['cari']) or $_GET['q']==""){
-                                    $filterAngkatan="";
-                                }else{
-                                    $filterAngkatan="AND angkatan='$_GET[q]'";
+                                if (empty($_GET['cari']) or $_GET['q'] == "") {
+                                    $filterAngkatan = "";
+                                } else {
+                                    $filterAngkatan = "AND angkatan='$_GET[q]'";
                                 }
                                 $sql = $DB_CON->prepare("SELECT * FROM mahasiswa WHERE visible='1' $filterAngkatan ORDER BY nama_mahasiswa");
                                 $sql->execute();

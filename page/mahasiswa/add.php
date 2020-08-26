@@ -26,6 +26,12 @@ $link = $linkglobal . 'page/mahasiswa/';
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label text-right">Id admin</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" name="idadmin" class="form-control" placeholder="ID Admin" value="<?php echo $hasil['id_admin']; ?>" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label text-right">Nama Mahasiswa</label>
                                     <div class="col-sm-7">
                                         <input type="text" name="nama<?php echo $i; ?>" class="form-control" placeholder="Nama Mahasiswa" required>
@@ -65,6 +71,12 @@ $link = $linkglobal . 'page/mahasiswa/';
                                     <label class="col-sm-2 col-form-label text-right">Kode Pos</label>
                                     <div class="col-sm-7">
                                         <input type="text" name="kodepos<?php echo $i; ?>" class="form-control" placeholder="Kode Pos">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label text-right">Visible</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" name="visible" class="form-control" placeholder="visible" value="1" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -113,7 +125,7 @@ if (isset($_POST['ok'])) {
         $telp = $_POST['telp' . $i];
         $alamat = $_POST['namajalan' . $i] . '-' . $_POST['kecamatan' . $i] . '-' . $_POST['kodepos' . $i];
         $nim = $_POST['nim' . $i];
-        $angkatan = $_POST['angkatan'.$i];
+        $angkatan = $_POST['angkatan' . $i];
 
         $sqlcek = $DB_CON->prepare("SELECT * FROM mahasiswa WHERE nim_mahasiswa='$nim'");
         $sqlcek->execute();

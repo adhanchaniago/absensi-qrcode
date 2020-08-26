@@ -1,7 +1,7 @@
 <?php
 include "../../header.php";
 include "../../sidebar.php";
-$link= $linkglobal.'page/admin/';
+$link = $linkglobal . 'page/admin/';
 ?>
 <!-- MAIN -->
 <div class="main">
@@ -65,6 +65,12 @@ $link= $linkglobal.'page/admin/';
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-2 col-form-label text-right">Visible</label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="visible" class="form-control" placeholder="visible" value="1" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label text-right"></label>
                                 <div class="col-sm-7">
                                     <button type="submit" name="ok" class="btn btn-success">Simpan</button>
@@ -83,20 +89,20 @@ $link= $linkglobal.'page/admin/';
 <!-- END MAIN -->
 <?php include "../../footer.php"; ?>
 <?php
-if(isset($_POST['ok'])){
-    $nama=$_POST['nama'];
-    $username=$_POST['username'];
-    $password=md5($_POST['password']);
-    $telp=$_POST['telp'];
-    $alamat=$_POST['namajalan'].'-'.$_POST['kecamatan'].'-'.$_POST['kodepos'];
-    $gelar=$_POST['gelar'];
+if (isset($_POST['ok'])) {
+    $nama = $_POST['nama'];
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+    $telp = $_POST['telp'];
+    $alamat = $_POST['namajalan'] . '-' . $_POST['kecamatan'] . '-' . $_POST['kodepos'];
+    $gelar = $_POST['gelar'];
 
-    $sql=$DB_CON->prepare("INSERT INTO admin SET nama_admin='$nama',username='$username',password='$password',no_telp='$telp',alamat='$alamat',gelar='$gelar',visible='1'");
+    $sql = $DB_CON->prepare("INSERT INTO admin SET nama_admin='$nama',username='$username',password='$password',no_telp='$telp',alamat='$alamat',gelar='$gelar',visible='1'");
     $sql->execute();
-    if($sql){
+    if ($sql) {
         header("location:index.php");
-    }else{
-        echo"<script>alert('Erorr Gagal Insert Data !!!');</script>";
+    } else {
+        echo "<script>alert('Erorr Gagal Insert Data !!!');</script>";
     }
 }
 ?>

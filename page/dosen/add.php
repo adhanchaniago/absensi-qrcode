@@ -23,6 +23,12 @@ $link= $linkglobal.'page/dosen/';
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-2 col-form-label text-right">Id admin</label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="idadmin" class="form-control" placeholder="ID Admin" value="<?php echo $hasil['id_admin']; ?>" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label text-right">Username</label>
                                 <div class="col-sm-7">
                                     <input type="text" name="username" class="form-control" placeholder="username">
@@ -65,6 +71,12 @@ $link= $linkglobal.'page/dosen/';
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-2 col-form-label text-right">Visible</label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="visible" class="form-control" placeholder="visible" value="1" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label text-right"></label>
                                 <div class="col-sm-7">
                                     <button type="submit" name="ok" class="btn btn-success">Simpan</button>
@@ -90,8 +102,9 @@ if(isset($_POST['ok'])){
     $telp=$_POST['telp'];
     $alamat=$_POST['namajalan'].'-'.$_POST['kecamatan'].'-'.$_POST['kodepos'];
     $gelar=$_POST['gelar'];
+    $visible=$_POST['visible'];
 
-    $sql=$DB_CON->prepare("INSERT INTO dosen SET nama_dosen='$nama',username='$username',password='$password',no_telp='$telp',alamat='$alamat',gelar='$gelar',visible='1',id_admin='$_SESSION[qrid]'");
+    $sql=$DB_CON->prepare("INSERT INTO dosen SET nama_dosen='$nama',username='$username',password='$password',no_telp='$telp',alamat='$alamat',gelar='$gelar',visible='$visible',id_admin='$_SESSION[qrid]'");
     $sql->execute();
     if($sql){
         header("location:index.php");

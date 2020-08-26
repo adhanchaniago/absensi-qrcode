@@ -1,7 +1,7 @@
 <?php
 include "../../header.php";
 include "../../sidebar.php";
-$link= $linkglobal.'page/matakuliah/';
+$link = $linkglobal . 'page/matakuliah/';
 if (!empty($_GET['id'])) {
     $sqledit = $DB_CON->prepare("SELECT * FROM matakuliah WHERE kode_matakuliah='$_GET[id]'");
     $sqledit->execute();
@@ -37,6 +37,12 @@ if (!empty($_GET['id'])) {
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-2 col-form-label text-right">Id admin</label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="idadmin" class="form-control" placeholder="ID Admin" value="<?php echo $hasil['id_admin']; ?>" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-2 col-form-label text-right">Matakuliah</label>
                                 <div class="col-sm-7">
                                     <input type="text" name="nama" class="form-control" placeholder="Nama Matakuliah" required value="<?php echo $nama ?>">
@@ -46,6 +52,12 @@ if (!empty($_GET['id'])) {
                                 <label class="col-sm-2 col-form-label text-right">Sks</label>
                                 <div class="col-sm-7">
                                     <input type="number" name="sks" class="form-control" placeholder="SKS" required value="<?php echo $sks; ?>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label text-right">Visible</label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="visible" class="form-control" placeholder="visible" value="1" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
