@@ -67,7 +67,7 @@ include "config.php";
                                 </div>
                                 <button type="submit" name="login" class="btn btn-primary btn-lg btn-block">LOGIN</button>
                                 <div class="form-group">
-                                    <a href="javascript:void(0)" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">Bantuan</a>
+                                    <a href="javascript:void(0)" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">Help</a>
                                 </div>
                             </form>
                         </div>
